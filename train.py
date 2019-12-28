@@ -48,12 +48,12 @@ def get_variable(input):
 
 # 加载数据集
 def generate_dataset():
-    train_sets = datasets.MNIST(root='./dataset/MNIST',
+    train_sets = datasets.MNIST(root='./dataset',
                                 train=True,
                                 transform=transforms.ToTensor(),
                                 download=True)
 
-    test_sets = datasets.MNIST(root='./dataset/MNIST',
+    test_sets = datasets.MNIST(root='./dataset',
                                train=False,
                                transform=transforms.ToTensor(),
                                download=True)
@@ -117,9 +117,9 @@ def main(params):
         correct += (predicted == labels.data).sum()
 
     print('Total: %d, Correct: %d Wrong: %d' % (total, correct, total - correct))
-    precision = 100 * float(correct) / float(total)
-    nni.report_final_result(precision)
-    print('precision: %.4f %%' % (precision))
+    accuracy = 100 * float(correct) / float(total)
+    nni.report_final_result(accuracy)
+    print('accuracy: %.4f %%' % (accuracy))
 
 if __name__ == '__main__':
     # params = {'epoch':5, 'lr':0.1, 'bz':32}
