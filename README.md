@@ -76,6 +76,7 @@ NNI中参数空间的定义由一个JSON文件指定，一个简单的参数空�
     <td>uniform</td>
     <td>均匀分布，此时_value应该为[lower, upper], 给出参数的范围</td>
   </tr>
+</table>
 
 此外还可以有quniform，loguniform， normal等取值，代表生成的参数应该满足某个分布。
 
