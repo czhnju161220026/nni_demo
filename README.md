@@ -213,7 +213,7 @@ NNI的体系结构为：
 
 ### Tuner
 
-在NNI SDK中，Tunner是一个抽象基类，它需要我们实现如下三个方法：
+在NNI SDK中，Tuner是一个抽象基类，它需要我们实现如下三个方法：
 
 ``` python
 # Copyright (c) Microsoft Corporation.
