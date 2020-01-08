@@ -1,0 +1,34 @@
+authorName: default
+experimentName: example_tf
+trialConcurrency: 1
+maxExecDuration: 1h
+maxTrialNum: 5
+#choice: local, remote, pai, kubeflow
+trainingServicePlatform: kubeflow
+searchSpacePath: search_space_tf.json
+logDir: /home/czh/nni_log_dir
+nniManagerIp: 210.28.132.167
+#choice: true, false
+useAnnotation: false
+tuner:
+  #choice: TPE, Random, Anneal, Evolution, BatchTuner, MetisTuner, GPTuner
+  builtinTunerName: TPE
+  classArgs:
+    #choice: maximize, minimize
+    optimize_mode: maximize
+trial:
+  codeDir: .
+  worker:
+    replicas: 1
+    command: python3 mnist_tf.py
+    gpuNum: 1
+    cpuNum: 1
+    memoryMB: 8192
+    image: msranni/nni:latest
+kubeflowConfig:
+  operator: tf-operator
+  apiVersion: v1
+  storage: nfs
+  nfs:
+    server: 210.28.132.167
+    path: /data/nfs/nni_storage
