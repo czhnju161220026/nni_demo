@@ -1,6 +1,6 @@
 authorName: czh
 experimentName: example_mnist
-trialConcurrency: 1
+trialConcurrency: 3
 maxExecDuration: 1h
 maxTrialNum: 10
 #choice: local, remote, pai
@@ -21,21 +21,21 @@ trial:
   codeDir: .
   master:
     replicas: 1
-    command: python3 train.py
-    gpuNum: 1
+    command: python3 mnist_pt.py
+    gpuNum: 0
     cpuNum: 1
     memoryMB: 2048
     image: msranni/nni:latest
   worker:
     replicas: 1
-    command: python3 train.py
-    gpuNum: 0
+    command: python3 mnist_pt.py
+    gpuNum: 1
     cpuNum: 1
     memoryMB: 2048
     image: msranni/nni:latest
 kubeflowConfig:
   operator: pytorch-operator
-  apiVersion: v1alpha2
+  apiVersion: v1beta2
   nfs:
     server: 210.28.132.167
     path: /data/nfs/nni_storage
