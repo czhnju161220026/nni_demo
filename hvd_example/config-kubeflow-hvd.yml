@@ -1,0 +1,42 @@
+authorName: czh
+experimentName: example_mnist
+trialConcurrency: 2
+maxExecDuration: 1h
+maxTrialNum: 10
+#choice: local, remote, pai
+trainingServicePlatform: kubeflow
+searchSpacePath: search_space_hvd.json
+logDir: /home/czh/nni_log_dir
+nniManagerIp: 210.28.132.167
+#choice: true, false
+useAnnotation: false
+tuner:
+  #choice: TPE, Random, Anneal, Evolution, BatchTuner, MetisTuner, GPTuner
+  #SMAC (SMAC should be installed through nnictl)
+  builtinTunerName: TPE
+  classArgs:
+    #choice: maximize, minimize
+    optimize_mode: maximize
+trial:
+  codeDir: .
+  master:
+    replicas: 1
+    command: horovodrun -np 2 -H localhost:2 python3 train.py 
+    gpuNum: 2
+    cpuNum: 1
+    memoryMB: 8912
+    image: registry.cn-hangzhou.aliyuncs.com/cuizihan/registry-cuizihan/nni:0.18.1-tf1.14.0-torch1.2.0-mxnet1.5.0-py3.6-nni1.3
+  worker:
+    replicas: 1
+    command: echo hello
+    gpuNum: 0
+    cpuNum: 1
+    memoryMB: 200
+    image: registry.cn-hangzhou.aliyuncs.com/cuizihan/registry-cuizihan/nni:0.18.1-tf1.14.0-torch1.2.0-mxnet1.5.0-py3.6-nni1.3
+kubeflowConfig:
+  operator: pytorch-operator
+  apiVersion: v1beta2
+  nfs:
+    server: 210.28.132.167
+    path: /data/nfs/nni_storage
+
