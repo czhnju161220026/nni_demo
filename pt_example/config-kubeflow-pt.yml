@@ -6,7 +6,7 @@ maxTrialNum: 10
 #choice: local, remote, pai
 trainingServicePlatform: kubeflow
 searchSpacePath: search_space_pt.json
-logDir: /home/czh/nni_log_dir
+logDir: /data/nfs/nni_log_dir
 nniManagerIp: 210.28.132.167
 #choice: true, false
 useAnnotation: false
@@ -22,14 +22,14 @@ trial:
   master:
     replicas: 1
     command: python3 mnist_pt.py
-    gpuNum: 0
+    gpuNum: 1
     cpuNum: 1
     memoryMB: 2048
     image: msranni/nni:latest
   worker:
     replicas: 1
-    command: python3 mnist_pt.py
-    gpuNum: 1
+    command: echo hello
+    gpuNum: 0
     cpuNum: 1
     memoryMB: 2048
     image: msranni/nni:latest

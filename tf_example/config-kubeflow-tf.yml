@@ -1,12 +1,12 @@
 authorName: default
 experimentName: example_tf
-trialConcurrency: 1
+trialConcurrency: 2
 maxExecDuration: 1h
 maxTrialNum: 5
 #choice: local, remote, pai, kubeflow
 trainingServicePlatform: kubeflow
 searchSpacePath: search_space_tf.json
-logDir: /home/czh/nni_log_dir
+logDir: /data/nfs/nni_log_dir
 nniManagerIp: 210.28.132.167
 #choice: true, false
 useAnnotation: false
