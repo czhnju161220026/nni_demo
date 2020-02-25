@@ -72,7 +72,7 @@ def main():
     
 
 
-    trainset = dataloader(root="/data/nfs/cifar", train=True, download=True, transform=transform_train)
+    trainset = dataloader(root="./data/cifar", train=True, download=True, transform=transform_train)
     sampler = torch.utils.data.distributed.DistributedSampler(trainset,num_replicas=hvd.size(), rank=hvd.rank())
     trainloader = data.DataLoader(dataset=trainset, batch_size=param['batch_size'] * world_size, shuffle=False, sampler=sampler)
 
@@ -137,8 +137,7 @@ def train(trainloader, model, criterion, optimizer, epoch, use_cuda):
         optimizer.step()
     return (losses.avg, top1.avg)
 
-def test(testloader, model, criterion, epoch, use_cuda):
-    global best_acc
+def test(testloader, model, criterion, epoch, use_cuda): 
     losses = AverageMeter()
     top1 = AverageMeter()
     top5 = AverageMeter()
@@ -171,7 +170,7 @@ def adjust_learning_rate(optimizer, epoch):
     if epoch in schedule:
         param['lr'] *= 0.1
         for param_group in optimizer.param_groups:
-            param_group['lr'] = state['lr']
+            param_group['lr'] = param['lr']
 
 if __name__ == '__main__':
     global param
